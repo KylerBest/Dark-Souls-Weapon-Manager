@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import MainPage from "./MainPage";
+import Header from "./Header";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
+  const [search, setSearch] = useState('')
+  const [weapons, setWeapons] = useState([])
+  const [favorites, setFavorites] = useState([])
+
+  useEffect(() => {
+    fetch('https://jgalat.github.io/ds-weapons-api/')
+    .then(r => r.json())
+    .then(data => {
+        setWeapons(data)
+    })
+  }, [setWeapons])
+  
+  const filteredWeapons = weapons.filter(w => 
+    w.name.toLowerCase().includes(search.toLowerCase()))
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header 
+        setSearch={setSearch}
+      />
+      <Routes>
+        <Route 
+        path='/' 
+        element={<MainPage 
+          weapons={filteredWeapons}
+          setFavorites={setFavorites} />} 
+        />
+        <Route path='/favorites' />
+      </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
