@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import WeaponCard from './WeaponCard';
 
-export default function MainPage({weapons, setFavorites, favorites}) {
-    
-    function onCardClick(weapon){
-        setFavorites([...favorites, weapon])
-    }
+export default function MainPage({weapons, favorites, setFavorites}) {
 
     return (
         <div className='wrapper'>
@@ -13,7 +9,8 @@ export default function MainPage({weapons, setFavorites, favorites}) {
                 <WeaponCard 
                     key={weapon.name}
                     weapon={weapon}
-                    onClick={onCardClick}
+                    favorites={favorites}
+                    setFavorites={setFavorites}
                 />
             )}
         </div>

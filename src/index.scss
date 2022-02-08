@@ -13,9 +13,13 @@ p {
 }
 
 body {
-  line-height: 1.6;
+  line-height: 1.4;
   background: rgb(224, 224, 216);
   min-width: 325px;
+}
+
+.col-span-2 {
+  grid-column: span 2;
 }
 
 header {
@@ -39,7 +43,6 @@ header {
       padding: 0 .5em;
     }
   }
-
 }
 
 .wrapper {
@@ -53,7 +56,15 @@ header {
   max-width: 100em;
 }
 
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  
+}
+
 .card {
+  &.favorite {
+    background: yellow;
+  }
   background: rgb(224, 224, 216);
   padding: 1rem 1rem;
   width: 100%;
@@ -61,29 +72,19 @@ header {
   border: 1px solid black;
   display: grid;
   align-items: center;
-  * {
-    margin: 0;
-  }
   h2 {
     font-size: 1.2em;
-  }
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;  
   }
   a, button {
     border: solid black 1px;
     background: rgb(224, 224, 216);
     text-decoration: none;
     margin-inline: .5em;
+    margin-block: .5em;
     color: black;
     font-weight: bold;
     font-size: 1em;
 }
-}
-
-.favorite, .favorite:hover {
-  background: yellow;
 }
 
 nav a:hover, 

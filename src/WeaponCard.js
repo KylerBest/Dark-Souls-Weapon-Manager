@@ -1,35 +1,34 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-export default function WeaponCard({weapon, onClick}) {
-    let {name, weapon_type, requirements, bonus} = weapon
-    weapon.id = weapon.name
+export default function WeaponCard({weapon, favorites, setFavorites}) {
+    const {name, weapon_type} = weapon
     const wikiLink = `https://darksouls.wiki.fextralife.com/${weapon.name.replace(' ', '+')}`
+    const isFavorite = favorites.includes(weapon.name)
 
-    function handleClick(){
-        onClick(weapon)
+    function handleFavorite(){
+        if(isFavorite){
+            fetch(`http://localhost:4000/favoriteWeapons/${weapon.name}`, {method: 'DELETE'})
+                .then(setFavorites(favorites.filter(w => w !== weapon.name)))
+        }else{
+            fetch('http://localhost:4000/favoriteWeapons', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: weapon.name})
+            })
+                .then(setFavorites([...favorites, weapon.name]))
+        }
     }
 
     return (
-        <div className='card'>
+        <div className={isFavorite ? 'card favorite' : 'card'}>
             <h1>{name}</h1>
-            <h2>Weapon-type: {weapon_type}</h2>
+            <h2>Weapon-type: {weapon_type.toUpperCase()}</h2>
             <div className='split'>
-                    <h3>Requirements:</h3>
-                    <h3>Scaling:</h3>
-                <ul>
-                    <li>Strength: {requirements.strength}</li>
-                    <li>Dexterity: {requirements.dexterity}</li>
-                    <li>Faith: {requirements.faith}</li>
-                    <li>Intelligence: {requirements.intelligence}</li>
-                </ul>
-                <ul>
-                    <li>Strength: {bonus.strength}</li>
-                    <li>Dexterity: {bonus.dexterity}</li>
-                    <li>Faith: {bonus.faith}</li>
-                    <li>Intelligence: {bonus.intelligence}</li>
-                </ul>
+                <button className='col-span-2'>Details</button>
                 <a href={wikiLink} target="_blank">Wiki</a>
-                <button onClick={handleClick}>Favorite</button>
+                <button onClick={handleFavorite} >{isFavorite ? 'UnFavorite' : 'Favorite'}</button>
             </div>
         </div>
     )

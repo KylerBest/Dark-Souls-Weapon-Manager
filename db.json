@@ -1,3 +1,25 @@
 {
-  "favoriteWeapons": []
+  "favoriteWeapons": [
+    {
+      "id": "Great Scythe"
+    },
+    {
+      "id": "Dragonslayer Spear"
+    },
+    {
+      "id": "Dragon Tooth"
+    },
+    {
+      "id": "Gold Tracer"
+    },
+    {
+      "id": "Shotel"
+    },
+    {
+      "id": "Washing Pole"
+    },
+    {
+      "id": "Butcher Knife"
+    }
+  ]
 }
