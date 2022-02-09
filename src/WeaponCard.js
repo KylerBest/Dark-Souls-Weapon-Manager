@@ -6,13 +6,15 @@ export default function WeaponCard({weapon, favorites, setFavorites}) {
     const linkName = weapon.name.replaceAll(' ', '+')
     const wikiLink = `https://darksouls.wiki.fextralife.com/${linkName}`
     const isFavorite = favorites.includes(weapon.name)
+    const errorMsg = () => alert('Error: failed to connect. Changes will not be saved.')
 
     function handleFavorite(){
         if(isFavorite){
-            fetch(`http://localhost:4000/favoriteWeapons/${weapon.name}`, {method: 'DELETE'})
+            fetch(`https://still-escarpment-16824.herokuapp.com/favoriteWeapons/${weapon.name}`, {method: 'DELETE'})
                 .then(setFavorites(favorites.filter(w => w !== weapon.name)))
+                .catch(errorMsg)
         }else{
-            fetch('http://localhost:4000/favoriteWeapons', {
+            fetch('https://still-escarpment-16824.herokuapp.com/favoriteWeapons', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -20,6 +22,7 @@ export default function WeaponCard({weapon, favorites, setFavorites}) {
                 body: JSON.stringify({id: weapon.name})
             })
                 .then(setFavorites([...favorites, weapon.name]))
+                .catch(errorMsg)
         }
     }
 

@@ -13,10 +13,12 @@ function App() {
     fetch('https://jgalat.github.io/ds-weapons-api/')
       .then(r => r.json())
       .then(setWeapons)
+      .catch(() => alert('Error: Failed to retrieve weapon list.'))
 
-    fetch('http://localhost:4000/favoriteWeapons')
+    fetch('https://still-escarpment-16824.herokuapp.com/favoriteWeapons')
       .then(r => r.json())
       .then(data => setFavorites(data.map(w => w.id)))
+      .catch(() => alert('Error: Failed to retrieve favorites.'))
   }, [])
   
   const filteredWeapons = weapons.filter(w => 
