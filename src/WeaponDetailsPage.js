@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function WeaponDetailsPage({weapon}) {
-    console.log(weapon)
     const {
         attack_type, 
         name, 
