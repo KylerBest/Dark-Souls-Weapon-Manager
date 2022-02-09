@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import MainPage from "./MainPage";
 import Header from "./Header";
 import { Route, Routes } from "react-router-dom";
+import WeaponDetailsPage from "./WeaponDetailsPage";
 
 function App() {
   const [search, setSearch] = useState('')
@@ -43,6 +44,14 @@ function App() {
             setFavorites={setFavorites}
           />}
         />
+        {weapons.map(w => 
+        <Route
+          key={w.name}
+          path={`/${w.name.replaceAll(' ', '+')}`}
+          element={<WeaponDetailsPage
+            weapon={w}
+          />}
+        />)}
       </Routes>
     </div>
   )

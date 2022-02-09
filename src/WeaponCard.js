@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function WeaponCard({weapon, favorites, setFavorites}) {
     const {name, weapon_type} = weapon
-    const wikiLink = `https://darksouls.wiki.fextralife.com/${weapon.name.replace(' ', '+')}`
+    const linkName = weapon.name.replaceAll(' ', '+')
+    const wikiLink = `https://darksouls.wiki.fextralife.com/${linkName}`
     const isFavorite = favorites.includes(weapon.name)
 
     function handleFavorite(){
@@ -26,7 +28,12 @@ export default function WeaponCard({weapon, favorites, setFavorites}) {
             <h1>{name}</h1>
             <h2>Weapon-type: {weapon_type.toUpperCase()}</h2>
             <div className='split'>
-                <button className='col-span-2'>Details</button>
+                <Link 
+                    to={`/${linkName}`}
+                    className='col-span-2'
+                >
+                    Details
+                </Link>
                 <a href={wikiLink} target="_blank">Wiki</a>
                 <button onClick={handleFavorite} >{isFavorite ? 'UnFavorite' : 'Favorite'}</button>
             </div>
