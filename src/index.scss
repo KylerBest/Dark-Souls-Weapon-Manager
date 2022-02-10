@@ -54,6 +54,10 @@ header {
         border-left: none;
         background: rgb(224, 224, 216);
       }
+      button:hover{
+        background: rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+      }
     }
   }
 }
