@@ -51,7 +51,6 @@ header {
         height: 100%;
         color: black;
         border: solid black 1px;
-        border-left: none;
         background: rgb(224, 224, 216);
       }
       button:hover{
@@ -142,8 +141,6 @@ nav a:hover,
     font-size: 1.25em;
   }
   .searchBar{
-    input{
-      width: 70%;
-    }
+    display: grid;
   }
 }
