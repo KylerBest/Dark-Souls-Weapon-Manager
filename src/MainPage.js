@@ -1,7 +1,7 @@
 import React from 'react';
 import WeaponCard from './WeaponCard';
 
-export default function MainPage({weapons, favorites, setFavorites}) {
+export default function MainPage({weapons, favorites, setFavorites, search}) {
 
     return (
         <div className='wrapper'>
@@ -11,6 +11,7 @@ export default function MainPage({weapons, favorites, setFavorites}) {
                     weapon={weapon}
                     favorites={favorites}
                     setFavorites={setFavorites}
+                    search={search}
                 />
             )}
         </div>

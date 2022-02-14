@@ -22,7 +22,8 @@ function App() {
   }, [])
   
   const filteredWeapons = weapons.filter(w => 
-    w.name.toLowerCase().includes(search.toLowerCase()))
+    w.name.toLowerCase().includes(search.toLowerCase()) ||
+    w.weapon_type.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <div className="App">
@@ -37,6 +38,7 @@ function App() {
             weapons={filteredWeapons}
             favorites={favorites}
             setFavorites={setFavorites}
+            search={search}
           />} 
         />
         <Route
@@ -45,6 +47,7 @@ function App() {
             weapons={filteredWeapons.filter(w => favorites.includes(w.name))}
             favorites={favorites}
             setFavorites={setFavorites}
+            search={search}
           />}
         />
         {weapons.map(w => 
